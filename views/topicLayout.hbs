@@ -1,0 +1,6 @@
+<h3> {{topic.name}} </h3>
+<h5> {{topic.owner}}</h5>
+<form action="/topics/{{topic._id}}" method="POST">
+    <input name="_id" type="hidden" value="{{topic._id}}">
+    <button type="submit"> delete </button>
+</form>

@@ -1,0 +1,25 @@
+{{#if message}}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+{{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+<form action="/users/profile/{{profile._id}}" method="POST" enctype="multipart/form-data">
+    <h3>username: {{profile.username}}</h3>
+    <h3>name: <input id="name" name="name" type="text" value="{{profile.name}}"></h3>
+    <h3>age: <input id="age" name="age" type="number" value="{{profile.age}}"></h3>
+    <h3>Date of registration: {{profile.DateOfRegistration}}</h3>
+    {{#if profile.photo}}
+    <img src="/photoes/{{profile.photo}}" id="picture" alt="picture" width="150x" height="150">
+    {{else}}
+    <img src="" id="picture" alt="picture">
+    {{/if}}
+    <input type="file" accept="image/*" name="newImage" id="newImage">
+    <button type="submit">
+        Редактировать
+    </button>
+    <p><a href="/privateMessages/{{profile.username}}"> Отправить сообщение </a></p>
+</form>

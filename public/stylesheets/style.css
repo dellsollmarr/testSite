@@ -1,0 +1,77 @@
+html {
+    background: url("bg.jpg");
+    background-size: 100%;
+}
+
+#main {
+    margin: auto;
+    width: 1200px;
+    margin-top: 2%;
+}
+
+#left {
+    position: relative;
+    background: url("menu-bg.png");
+    float: left;
+    width: 20%;
+    height: 320px;
+}
+
+#menu {
+    position: absolute;
+    top: 30px;
+    list-style: none;
+}
+
+#menu li {
+    padding-top: 16px;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    transition: .3s linear;
+}
+
+#center {
+    float: left;
+    margin: 0px;
+    width: 80%;
+}
+
+#topicsList {
+    list-style: none;
+    border: solid black 2px;
+    padding: 3px;
+    margin: 1px;
+}
+
+#topicsList:hover {
+    background: rgb(156, 215, 255);
+}
+
+#picture {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+}
+
+#chatCont {
+    width: 241px;
+    border: solid 2px black;
+    margin-top: 5px;
+}
+
+.leftMessages {
+    text-align: left;
+}
+
+.rightMessages {
+    text-align: right;
+}
+
+#logoutButton {
+    margin-top: 30px;
+    margin-left: 37px;
+    font-size: 25px;
+}

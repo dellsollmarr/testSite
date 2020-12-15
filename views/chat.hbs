@@ -1,0 +1,51 @@
+<form id="form">
+  <input id="m" type="text">
+  <input type="submit" value="Send">
+</form>
+<div id = "chatCont"> 
+{{#each messages}}
+  <p owner = {{this.owner}} class="usermsg">{{this.owner}}: {{this.text}}</p>
+{{/each}}
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>  
+  let msg = document.getElementsByClassName("usermsg");
+  let currentUser = '{{user.username}}'
+  for(let i = 0; i < msg.length; i++)
+  {
+    let owner = msg[i].getAttribute('owner');
+    if (owner == currentUser)
+    {
+      msg[i].classList.add("rightMessages")
+    }
+    else 
+    {
+       msg[i].classList.add("leftMessages")
+    }
+  }
+</script>
+
+<script>
+   $(function () {
+    var socket = io();
+    console.log(socket);
+    $('#form').submit(function(e) {
+      e.preventDefault(); // prevents page reloading
+      socket.emit('message', {id: '{{user._id}}', username: '{{user.username}}', message: $('#m').val()});
+      $('#m').val('');
+      return false;
+    });
+    socket.on('message', async (msg) => {   
+      if("{{user.username}}"== msg.username)
+      {
+        await $('#chatCont').append(`<p owner = ${msg.username} class = "rightMessages usermsg">`+ msg.username + ": " + msg.message + '</p>');
+      } 
+      else 
+      {
+        await $('#chatCont').append(`<p owner = ${msg.username} class = "leftMessages usermsg">`+ msg.username + ": " + msg.message + '</p>');
+      }
+    });
+  });
+</script>

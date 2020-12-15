@@ -1,0 +1,45 @@
+
+<form id="form">
+  <input id="m" type="text">
+  <input type="submit" value="Send">
+</form>
+
+{{!-- <ul>
+  {{#each dialog}}
+    <li> {{this.owner}}: {{this.text}} </li>
+  {{/each}}
+</ul> --}}
+
+<div id = "chatCont"> 
+{{#each dialog}}
+  <p owner = {{this.owner}} class="usermsg">{{this.owner}}: {{this.text}}</p>
+{{/each}}
+</div>
+<script>  
+  let msg = document.getElementsByClassName("usermsg");
+  let currentUser = '{{user.username}}'
+  for(let i = 0; i < msg.length; i++)
+  {
+    let owner = msg[i].getAttribute('owner');
+    if (owner == currentUser)
+    {
+      msg[i].classList.add("rightMessages")
+    }
+    else 
+    {
+       msg[i].classList.add("leftMessages")
+    }
+  }
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+  $(function () {
+    $('#form').submit(function (e) {
+      e.preventDefault(); // prevents page reloading
+      socket.emit('PrivateMessage', { reciver: "{{chater}}" , sender: '{{user.username}}', message: $('#m').val() });
+
+      $('#m').val('');
+      return false;
+    });
+  });
+</script>
